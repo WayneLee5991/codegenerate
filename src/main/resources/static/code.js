@@ -1,0 +1,42 @@
+$(function(){
+	$.ajax({
+		url:"http://localhost:8888/code/tables",
+		//https://codegenerate.herokuapp.com
+		type:"get",
+		success:function(res){
+			console.log(res.data);
+			new Vue({
+				el:"#app",
+				data:{
+					tables:res.data,
+					tableList:[],// 表名
+				},
+				methods:{
+					generate:function(){
+						$.ajax({
+							url:"http://localhost:8888/code/generate",
+							type:"post",
+							data:{
+								panName:$("#pan").val(),
+								author:$("#author").val(),
+								poName:$("#po").val(),
+								daoName:$("#dao").val(),
+								serviceName:$("#ser").val(),
+								serviceImplName:$("#impl").val(),
+								controllerName:$("#con").val(),
+								tablelist:JSON.stringify(this.tableList),
+							},
+							success:function(data){
+								console.log(data);
+								if(data.msg=="success"){
+									alert("生成成功");
+								}
+							}
+						})
+					}
+				},
+			});
+		}
+	})
+			
+})

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>代码生成器  v1.0.0</title>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+	<script src="code.js"></script>
+</head>
+<body>
+	<h1 class="col-md-6 col-md-offset-3">代码生成器  v1.0.0</h1>
+	<div id="app" class="col-md-6 col-md-offset-3" style="border:1px solid red">
+		
+			<form action="" class="form-horizontal" role="form">
+				<div class="col-md-offset-1">
+					<h3>请选择你要生成代码的表：</h3>
+					<ul>
+						<li v-for="table in tables">
+							<div class="checkbox">
+								<input type="checkbox" name="tables" :value="table" v-model="tableList"><span v-text="table"></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="form-group">
+					<label for="pan" class="col-sm-3 control-label">输入要保存的盘符:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="pan" class="form-control" name="panname" value="E"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="author" class="col-sm-3 control-label">输入本人姓名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="author" class="form-control" name="author" value="lwq"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="po" class="col-md-3 control-label">model类代码的包名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="po" class="form-control" name="poname" value="com.yuyi.model"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dao" class="col-md-3 control-label">dao类代码的包名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="dao" class="form-control" name="daoname" value="com.yuyi.lwq.dao"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="ser" class="col-md-3 control-label">service接口代码的包名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="ser" class="form-control" name="servicename" value="com.yuyi.lwq.service"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="impl" class="col-md-3 control-label">service实现类代码的包名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="impl" class="form-control" name="serviceimplname" value="com.yuyi.lwq.serviceimpl"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="con" class="col-md-3 control-label">controller类代码的包名:</label>
+					<div class="col-md-7">
+					 	<input type="text" id="con" class="form-control" name="controllername" value="com.yuyi.lwq.controller"/>
+					</div>
+				</div>
+				<div class="col-md-6 col-md-offset-3">
+					<button type="button" class="btn btn-info btn-block" @click="generate">生成</button>
+				</div>
+	    	</form>
+	</div>	
+</body>
+</html>
