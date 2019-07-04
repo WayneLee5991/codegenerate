@@ -53,6 +53,11 @@ public class CodeController {
 	 * @param serviceImplName
 	 * @param controllerName
 	 * @param tablelist
+	 * @param model		   是否生成model类代码
+	 * @param dao		   是否生成DAO类代码
+	 * @param service	   是否生成service代码
+	 * @param controller 是否生成controller代码
+	 * @param primaryKey insert时主键的设置，1：主键自增，2：自己生成主键
 	 * @return
 	 * @throws Exception
 	 */
@@ -75,7 +80,7 @@ public class CodeController {
 		for (String tbName : tables) {
 			if (dao) {
 				codeService.createProvider(author,primaryKey,tbName, poName,daoName, panName);
-				codeService.createDAO(author,tbName, poName, daoName, panName);
+				codeService.createDAO(author,primaryKey,tbName, poName, daoName, panName);
 			}
 			if (model) {
 				codeService.createModel(author,tbName,poName, panName);

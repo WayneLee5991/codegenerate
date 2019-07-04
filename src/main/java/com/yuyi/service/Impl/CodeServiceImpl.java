@@ -401,7 +401,7 @@ public class CodeServiceImpl implements CodeService {
 	
 	//创建dao 注解方式
 	@Override
-	public void createDAO(String author,String tbName, String poName, String daoName, String panName) throws Exception {
+	public void createDAO(String author,Integer primary,String tbName, String poName, String daoName, String panName) throws Exception {
 
 		String fpath=this.creatFile(panName, daoName);
 		
@@ -463,7 +463,9 @@ public class CodeServiceImpl implements CodeService {
 		content+="@Mapper\r\n";
 		content+="public interface "+idaoname+"{\r\n\r\n";
 		content+="    @InsertProvider(method = \"insert"+po+"\", type = "+po+author.toUpperCase()+"Provider.class)\r\n";
-		content+="    @Options(useGeneratedKeys = true,keyProperty = \""+poa+"."+primaryKey+"\")\r\n";
+		if (Objects.equals(primary, 1)) {
+			content+="    @Options(useGeneratedKeys = true,keyProperty = \""+poa+"."+primaryKey+"\")\r\n";
+		}
 		content+="	Integer insert(@Param(\""+poa+"\")"+poDO+" "+poa+")throws Exception;\r\n\r\n";
 		
 		/*content+="    @Delete(\"delete from "+tbName+" where "+primaryKey+" = #{"+poa+"."+primaryKey+"} \")\r\n";
@@ -531,7 +533,7 @@ public class CodeServiceImpl implements CodeService {
 		content+="    /**\r\n";
 		content+="    * 根据id修改"+tbName+"\r\n";
 		content+="    */\r\n";
-		content+="	int updateById("+poDO+" "+poa+")throws Exception;\r\n\r\n";
+		content+="	Integer updateById("+poDO+" "+poa+")throws Exception;\r\n\r\n";
 		
 		content+="    /**\r\n";
 		content+="    * 查询"+tbName+"所有信息\r\n";
@@ -635,9 +637,9 @@ public class CodeServiceImpl implements CodeService {
 		String fpath=this.creatFile(panName, controllerName);
 		String po=this.dealPo(tbName);
 		
-		String iserviceName=po+author.toUpperCase()+"Service";
-		String iserviceNameLower=iserviceName.toLowerCase();
-		String iserviceImplName=po+author.toUpperCase()+"ServiceImpl";
+		String iserviceName=po+author.toUpperCase() + "Service";
+		String iserviceNameLower = po.toLowerCase() + "Service";
+		String iserviceImplName = iserviceName.substring(0,1).toLowerCase()+iserviceName.substring(1);
 		String icontrollerName=po+"Controller";
 		
 		String content="package "+controllerName+";\r\n\r\n";
@@ -664,7 +666,7 @@ public class CodeServiceImpl implements CodeService {
 		content+="     *\r\n";
 		content+="     * @return\r\n";
 		content+="     */\r\n";
-		content+="    @GetMapping(\"   \")\r\n";
+		content+="    @GetMapping(\"/\")\r\n";
 		content+="    public String findAll() {\r\n";
 		content+="          return \"success\";\r\n";
 		content+="    }\r\n";

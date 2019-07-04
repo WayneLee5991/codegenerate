@@ -40,7 +40,7 @@ public interface CodeService {
 	 * @param panName
 	 * @throws Exception
 	 */
-	void createDAO(String author,String tbName,String poName,String daoName,String panName)throws Exception;
+	void createDAO(String author,Integer primaryKey,String tbName,String poName,String daoName,String panName)throws Exception;
 	
 	/**生成Service接口
 	 * @param tbName
